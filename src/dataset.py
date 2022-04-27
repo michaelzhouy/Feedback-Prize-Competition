@@ -53,12 +53,13 @@ class BucketBatchSampler(Sampler[Iterable[int]]):
     """
 
     def __init__(self, texts: List[str], batch_size: int):
+        self.batch_size = batch_size
         indices = np.argsort([len(text.split()) for text in texts])
-        if len(indices) % batch_size > 0:
-            padding = batch_size - len(indices) % batch_size
+        if len(indices) % self.batch_size > 0:
+            padding = self.batch_size - len(indices) % self.batch_size
             indices = np.append(indices, [-1] * padding)
 
-        self.buckets = indices.reshape(-1, batch_size)
+        self.buckets = indices.reshape(-1, self.batch_size)
         self.permutation = np.random.permutation(self.buckets.shape[0])
 
     def __len__(self) -> int:
