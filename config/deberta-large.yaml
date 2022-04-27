@@ -54,5 +54,5 @@ train:
   evaluate_after_steps: 2500
   save_best_checkpoint: true
   precision: 16
-  gpus: 1
+  gpus: 4
   drop_last: False
