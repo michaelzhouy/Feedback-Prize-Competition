@@ -52,8 +52,9 @@ class BucketBatchSampler(Sampler[Iterable[int]]):
         batch_size: The number of examples in each batch.
     """
 
-    def __init__(self, texts: List[str], batch_size: int):
+    def __init__(self, texts: List[str], batch_size: int, drop_lasr: bool):
         self.batch_size = batch_size
+        self.drop_last = True
         indices = np.argsort([len(text.split()) for text in texts])
         if len(indices) % self.batch_size > 0:
             padding = self.batch_size - len(indices) % self.batch_size
