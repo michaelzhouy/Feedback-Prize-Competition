@@ -97,10 +97,10 @@ class FeedbackPrizeDataModule(LightningDataModule):
         # Create sequence-bucket batch samplers for train and validation.
         np.random.seed(self.config.dataset.random_seed)
         self.train_batch_sampler = BucketBatchSampler(
-            self.train_dataset.texts, self.config.train.batch_size
+            self.train_dataset.texts, self.config.train.batch_size, self.config.train.drop_last
         )
         self.val_batch_sampler = BucketBatchSampler(
-            self.val_dataset.texts, self.config.train.batch_size
+            self.val_dataset.texts, self.config.train.batch_size, self.config.train.drop_last
         )
 
     def train_dataloader(self) -> DataLoader:

@@ -55,3 +55,4 @@ train:
   save_best_checkpoint: true
   precision: 16
   gpus: 1
+  drop_last: False
